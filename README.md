@@ -11,11 +11,11 @@ Large-scale crawling and processing Southeast Asian speech into clean ASR traini
 
 ## Goals
 1. Collect large-scale speech data from YouTube
-   Covering Bahasa Indonesia, Indonesian–English code-switching, and Southeast Asian English accents (Indonesian, Filipino, Indian).
-2. Run scalable ASR processing on NSCC  
-   Reproduce and adapt the GigaSpeech2 and NeMo SDP / Granary pipelines for Indonesian and SEA data.
-3. Produce clean, trainable ASR datasets  
-   Generate segmented audio + transcripts with consistent normalisation, filtering, and manifests ready for downstream ASR training.
+   - Covering Bahasa Indonesia, Indonesian–English code-switching, and Southeast Asian English accents (Indonesian, Filipino, Indian).
+3. Run scalable ASR processing on NSCC
+   - Reproduce and adapt the GigaSpeech2 and NeMo SDP / Granary pipelines for Indonesian and SEA data.
+5. Produce clean, trainable ASR datasets 
+   - Generate segmented audio + transcripts with consistent normalisation, filtering, and manifests ready for downstream ASR training.
    
 ## High-Level Pipeline
 1. Crawl audio & metadata on Google Colab using yt-dlp (with rate limiting / VPN or cookie handling as needed).
