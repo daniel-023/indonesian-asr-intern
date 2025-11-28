@@ -65,12 +65,12 @@ Raw hours crawled:
   - Added post-processing rules to remove utterances containing numbers and dates.  
   - Compiled processed segments into a training dataset with aligned `wav`–`txt` pairs.
 
-- **Weeks 11–12 – Robust crawling & accented English evaluation**  
+- **Weeks 11–12 – Debugged crawling & accented English evaluation**  
   - Continued Filipino-accented English crawling.  
   - Updated the yt-dlp crawling script to use a local `deno` installation for deciphering YouTube `n`/`sig` values.  
   - Sampled ~10 hours of segment-level wav–transcript pairs for export.  
   - Compared GigaSpeech2 and Granary performance on noisy, accented English data.
 
-- **Weeks 13–14 – Final processing & repository preparation**  
+- **Weeks 13–14 – Continued processing & repository preparation**  
   - Processed Indonesian-accented English data with the GigaSpeech2 pipeline.
   - Compiled this repository as an internship deliverable.
