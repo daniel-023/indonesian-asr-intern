@@ -1,6 +1,4 @@
-## Environment Setup
-
-### Create and activate virtual environment
+## Create virtual environment
 ```shell
 module purge
 module load python/3.10.9
@@ -10,9 +8,7 @@ pip install --upgrade pip
 pip install faster-whisper tqdm librosa torchaudio
 ```
 
-## Usage
-
-### Running ASR Jobs
+## Running ASR Jobs
 
 Submit batch jobs using PBS with the following parameters:
 ```shell
@@ -26,7 +22,7 @@ qsub -J 1-7 -v ASR_LANG=en,COUNTRY=id,CHANNEL=apbshow conv_asr.pbs
 - `CHANNEL`: YouTube channel
 - `-J 1-7`: Job array range (optional)
 
-### Configuration
+## Configuration
 
 **Important:** Modify line 102 in `GigaSpeech2/pipeline/convert_transcribe/convert_and_transcribe.py`:
 ```python

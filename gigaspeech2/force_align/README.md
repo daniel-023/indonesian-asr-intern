@@ -1,6 +1,4 @@
-## Environment Setup
-
-### 1. Create Python Virtual Environment
+## Create Virtual Environment
 ```shell
 module purge
 module load python/3.10.9
@@ -13,7 +11,7 @@ pip install --extra-index-url https://download.pytorch.org/whl/cu121 "torch==2.1
 pip install soundfile sox tqdm dataclasses
 ```
 
-### 2. Set Up Micromamba for Sox
+## Set Up Micromamba for Sox
 ```shell
 # Install micromamba binary
 cd /scratch/users/ntu/daniel02/GigaSpeech2
@@ -31,15 +29,13 @@ export MAMBA_ROOT_PREFIX=/scratch/users/ntu/daniel02/GigaSpeech2/mamba
   sox
 ```
 
-### 3. Install Uroman (Unicode Romanization)
+## Install Uroman (Unicode Romanization)
 ```shell
 cd /scratch/users/ntu/daniel02/GigaSpeech2/GigaSpeech2
 git submodule update --init --recursive
 ```
 
-## Usage
-
-### Running Alignment Jobs
+## Running Alignment Jobs
 
 Submit batch jobs using PBS:
 ```shell
