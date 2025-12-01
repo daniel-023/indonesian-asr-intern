@@ -1,4 +1,4 @@
-## Create virtual environment
+## Create Virtual Environment
 ```shell
 module purge
 module load python/3.10.9
