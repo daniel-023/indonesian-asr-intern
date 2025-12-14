@@ -3,7 +3,7 @@ Large-scale crawling and processing of Southeast Asian speech into ASR training 
 
 ## Project Components:
 - YouTube crawling with [yt-dlp](https://github.com/yt-dlp/yt-dlp) on Google Colab
-- Large-scale audio processing on NSCC ASPIRE2A
+- Data processing and model inference on NSCC ASPIRE2A
 - Automatic transcription / segmentation via:
   - [GigaSpeech2](https://github.com/SpeechColab/GigaSpeech2)
   - [NeMo SDP (Granary)](https://github.com/NVIDIA/NeMo-speech-data-processor/tree/main/dataset_configs/multilingual/granary)
@@ -19,7 +19,7 @@ Large-scale crawling and processing of Southeast Asian speech into ASR training 
    
 ## High-Level Pipeline
 1. Crawl audio & metadata on Google Colab using yt-dlp.
-2. Sync crawled data to NSCC via `scp` or `rsync` into the `/scratch` directory.
+2. Sync crawled data to NSCC via `scp` or `rsync` into the NSCC scratch directory.
 3. Run speech processing pipelines:
    - GigaSpeech2
    - NeMo SDP / Granary
@@ -29,7 +29,7 @@ Large-scale crawling and processing of Southeast Asian speech into ASR training 
 ## Data Overview
 Raw hours crawled:
 
-| Category                    | Hours (approx.) |
+| Language                    | Hours (approx.) |
 |-----------------------------|-----------------|
 | Indonesian (mono + CS)      | ~2,900          |
 | English – Indonesian accent | ~763            |
@@ -73,5 +73,6 @@ Raw hours crawled:
   - Compared GigaSpeech2 and Granary performance on noisy, accented English data.
 
 - **Weeks 13–14 – Continued processing & repository preparation**  
-  - Processed Indonesian-accented English data with the GigaSpeech2 pipeline.
-  - Compiled this repository as an internship deliverable.
+  - Updated punctuation normalisation at force algnment stage to allow `'` and `-`.
+  - Processed Indonesian and Filipino-accented English speech with the GigaSpeech2 pipeline.
+  - Compiled GitHub repository.
