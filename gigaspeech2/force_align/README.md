@@ -41,3 +41,16 @@ Submit batch jobs using PBS:
 ```shell
 qsub -v COUNTRY=id,CHANNEL=MarinaTasha align.pbs
 ```
+
+## Update Punctuation Handling
+In `GigaSpeech2/pipeline/utils/force_alignment/text_normalization.py`
+Replace:
+```shell
+punct_pattern = r"[" + config["punc_set"]
+```
+With:
+```shell
+# Allow apostrophes (') and hyphens (-) to survive punctuation filtering
+safe_punc_set = config["punc_set"].replace("'", "").replace("-", "")
+punct_pattern = r"[" + safe_punc_set
+```

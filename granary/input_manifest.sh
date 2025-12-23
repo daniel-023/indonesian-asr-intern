@@ -1,14 +1,6 @@
-# Remove trailing slash from input dir
-in_dir="${1%/}"
+RAW=/scratch/users/ntu/daniel02/Granary/id/raw_audio/granary_test
+OUT=/scratch/users/ntu/daniel02/Granary/input_manifest.json
 
-# Output file
-out_dir="${2%/}"
-mkdir -p "$out_dir"
-manifest="$out_dir/input_manifest.json"
-
-# Generate JSONL manifest
-find "$in_dir" -name "*.webm" -print0 \
+find "$RAW" -name "*.webm" -print0 \
   | xargs -0 -I{} echo "{\"source_audio_filepath\": \"{}\"}" \
-  > "$manifest"
-
-echo "Created manifest at: $manifest"
+  > "$OUT"

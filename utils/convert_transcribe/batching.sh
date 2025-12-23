@@ -1,4 +1,4 @@
-#!/bin/bash
+IN_DIR="/home/users/ntu/daniel02/scratch/GigaSpeech2/id/raw_audio/mono/Idntimes/audio"
 
 # Define the number of files per subfolder
 FILES_PER_SUBFOLDER=50
@@ -12,6 +12,7 @@ i=0
 # Initialize a counter for subfolders
 subfolder_num=1
 
+cd "$IN_DIR"
 # Loop through all files in the current directory
 for f in *.webm; do
     # Check if the current item is a file

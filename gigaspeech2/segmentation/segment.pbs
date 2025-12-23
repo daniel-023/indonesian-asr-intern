@@ -1,61 +1,39 @@
 #!/bin/bash
-#PBS -q normal
-#PBS -N segment
-#PBS -l select=1:ncpus=8:mem=16gb
-#PBS -l walltime=06:00:00
-#PBS -P personal-daniel02
 
-set -euo pipefail
-cd "$PBS_O_WORKDIR"
+IN_DIR="/scratch/users/ntu/daniel02/GigaSpeech2/id/raw_audio/mono/Idntimes/audio"
 
-# Required params
-ASR_LANG="${ASR_LANG}"     # en or id
-MODE="${MODE:-mono}"       # id-only: mono/cs
-COUNTRY="${COUNTRY:-}"     # en-only
-CHANNEL="${CHANNEL}"
+# Number of files per subfolder
+FILES_PER_SUBFOLDER=50
 
-module purge
-module load python/3.10.9
-source /scratch/users/ntu/daniel02/GigaSpeech2/envs/gsp2_post/bin/activate
+# Folder prefix
+SUBFOLDER_PREFIX="batch_"
 
-# ───────────────────────────────────────────────────────────
-# Load SoX via micromamba (NSCC bug workaround)
-# ───────────────────────────────────────────────────────────
-export MAMBA_ROOT_PREFIX=/scratch/users/ntu/daniel02/GigaSpeech2/mamba
-eval "$(/scratch/users/ntu/daniel02/GigaSpeech2/bin/micromamba shell hook -s bash)"
-micromamba activate soxbin
+# Counters
+i=0
+subfolder_num=1
 
-# ───────────────────────────────────────────────────────────
-# Determine input/output folders
-# ───────────────────────────────────────────────────────────
-if [[ -n "${PBS_ARRAY_INDEX:-}" ]]; then
-    printf -v BATCH "%03d" "$PBS_ARRAY_INDEX"
-
-    if [[ "$ASR_LANG" == "id" ]]; then
-        FIL="/scratch/users/ntu/daniel02/GigaSpeech2/id/work/${MODE}/${CHANNEL}/batch_${BATCH}/output_filter"
-        SEG="/scratch/users/ntu/daniel02/GigaSpeech2/id/work/${MODE}/${CHANNEL}/batch_${BATCH}/output_segment"
-    else
-        FIL="/scratch/users/ntu/daniel02/GigaSpeech2/en/work/${COUNTRY}/${CHANNEL}/batch_${BATCH}/output_filter"
-        SEG="/scratch/users/ntu/daniel02/GigaSpeech2/en/work/${COUNTRY}/${CHANNEL}/batch_${BATCH}/output_segment"
-    fi
-else
-    # Full directory mode
-    if [[ "$ASR_LANG" == "id" ]]; then
-        FIL="/scratch/users/ntu/daniel02/GigaSpeech2/id/work/${MODE}/${CHANNEL}/output_filter"
-        SEG="/scratch/users/ntu/daniel02/GigaSpeech2/id/work/${MODE}/${CHANNEL}/output_segment"
-    else
-        FIL="/scratch/users/ntu/daniel02/GigaSpeech2/en/work/${COUNTRY}/${CHANNEL}/output_filter"
-        SEG="/scratch/users/ntu/daniel02/GigaSpeech2/en/work/${COUNTRY}/${CHANNEL}/output_segment"
-    fi
+# Ensure directory exists
+if [[ ! -d "$IN_DIR" ]]; then
+    echo "ERROR: Directory does not exist → $IN_DIR"
+    exit 1
 fi
 
-mkdir -p "$SEG"
+cd "$IN_DIR"
 
-# ───────────────────────────────────────────────────────────
-# Run segmentation
-# ───────────────────────────────────────────────────────────
-cd /scratch/users/ntu/daniel02/GigaSpeech2/GigaSpeech2/pipeline/segmentation
-bash segment.sh "$FIL" "$SEG"
+# Loop through *.webm files
+for f in *.webm; do
+    [[ -f "$f" ]] || continue   # skip if no webm files
+    
+    batch="${SUBFOLDER_PREFIX}$(printf %03d "$subfolder_num")"
+    mkdir -p "$batch"
 
-echo "Total segments generated:"
-find "$SEG" -type f -name "*.wav" | wc -l
+    mv -- "$f" "$batch/"
+
+    ((i++))
+
+    if (( i % FILES_PER_SUBFOLDER == 0 )); then
+        ((subfolder_num++))
+    fi
+done
+
+echo "Moved $i files into $(ls -d ${SUBFOLDER_PREFIX}*/ | wc -l) batches."
