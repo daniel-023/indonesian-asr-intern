@@ -39,9 +39,9 @@ Raw hours crawled:
 
 - **Weeks 1–2 – GigaSpeech2 pipeline & crawling setup**  
   - Implemented the GigaSpeech2 pipeline on the NSCC cluster for a small Indonesian channel.  
-  - Set up YouTube crawling on Colab (yt-dlp, VPN, cookie handling and sleep intervals).  
+  - Set up YouTube crawling (yt-dlp, VPN, cookie handling and sleep intervals).  
   - Refined filtering: reduced confidence threshold and allowed LID labels `ms` and `id`.  
-  - Used WER analysis to assess alignment quality and data loss in the force alignment stage.
+  - Used WER to assess data loss in the force alignment stage.
 
 - **Weeks 3–4 – Large-scale processing & Granary trial**  
   - Identified Indonesian speech data sources (news channels, vlogs, commentary, etc.).  
@@ -51,7 +51,7 @@ Raw hours crawled:
 
 - **Weeks 5–6 – Scaling up & quality control**  
   - Implemented batching and parallel processing for the GigaSpeech2 pipeline on NSCC.  
-  - Compared GigaSpeech2 and Granary in terms of processing speed, segment length, and transcript quality.  
+  - Compared GigaSpeech2 and Granary for processing speed, segment length, and transcript quality.  
   - Investigated Granary segmentation issues (boundary word loss, chunking behaviour, hallucinations).
 
 - **Weeks 7–8 – SEA English accents & normalisation**  
