@@ -1,0 +1,39 @@
+# 📺 频道名称
+channel: "EchoroukTVOfficiel"
+
+# 🎯 视频抓取范围（从 start_index 开始，左闭右开）
+start_index: 11
+end_index: 13
+
+# 🗣️ 字幕检测目标语言（只检测该语言）
+subtitle_lang: "en"
+
+# ⚙️ 所有过滤条件归在 filter 下
+filter:
+  # 🌍 语言过滤开关及目标匹配词
+  enable_language_filter: true
+  target_language_abbr:
+    - "algeria"
+    - "ar"
+    - "dz"
+    - "algerie"
+    - "alg"
+
+
+  # 🎬 时长过滤
+  enable_duration_filter: true
+  min_duration: 20       # 单位：秒
+  max_duration: 18000    # 单位：秒
+
+  # 👍 点赞数过滤
+  enable_like_count_filter: true
+  min_like_count: 10
+
+  # 🎙️ 字幕过滤
+  filter_no_subtitle: true           # 丢弃无字幕视频
+  filter_no_manual_subtitle: false   # 丢弃无人工字幕视频
+
+
+# ✂️ 切分配置
+slice_sample_rate: 16000   # 输出采样率 Hz
+slice_save_audio: false    # 是否保存切片音频（false = 只保存 JSON）

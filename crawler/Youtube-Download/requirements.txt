@@ -1,0 +1,5 @@
+yt-dlp
+pyyaml
+ffmpeg
+pydub
+webvtt-py
